@@ -6,24 +6,24 @@ public class ChessSpace {
 	private boolean isOccupied;
 	private int column;
 	private int row;
-	private char colorOn;
-	private char pieceOn;
+	//private char colorOn;
+	private ChessPiece pieceOn;
 	
 	public ChessSpace (int row, int column, char color){
 		this.color = color;
 		this.column = column;
 		this.row = row;
 		this.isOccupied = false;
-		this.colorOn = 'n';
-		this.pieceOn = 'n';
+		//this.colorOn = 'n';
+		this.pieceOn = null;
 	}
 	
-	public ChessSpace (int row,int column, char color, char colorOn, char pieceOn){
+	public ChessSpace (int row,int column, char color, char colorOn, ChessPiece pieceOn){
 		this.color = color;
 		this.column = column;
 		this.row = row;
 		this.isOccupied = true;
-		this.colorOn = colorOn;
+	//	this.colorOn = colorOn;
 		this.pieceOn = pieceOn;
 	}
 
@@ -56,17 +56,17 @@ public class ChessSpace {
 		return row;
 	}
 	
-	public void setColorOn(char colorOn){
+/*	public void setColorOn(char colorOn){
 		this.colorOn = colorOn;
 	}
 	public char getColorOn(){
 		return colorOn;
 	}
-	
-	public void setPieceOn(char pieceOn){
+*/
+	public void setPieceOn(ChessPiece pieceOn){
 		this.pieceOn = pieceOn;
 	}
-	public char getPieceOn(){
+	public ChessPiece getPieceOn(){
 		return pieceOn;
 	}
 }
