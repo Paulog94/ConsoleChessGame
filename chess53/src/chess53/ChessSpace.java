@@ -69,4 +69,5 @@ public class ChessSpace {
 	public ChessPiece getPieceOn(){
 		return pieceOn;
 	}
+	
 }

@@ -5,6 +5,7 @@ public class ChessPiece {
 	private boolean hasMoved;
 	private int row;
 	private int column;
+	private char symbol;
 	
 	public ChessPiece(int row, int column, char color){
 		this.row = row;
@@ -17,7 +18,7 @@ public class ChessPiece {
 		this.color = color;
 	}
 	public char getColor(){
-		return color;
+		return this.color;
 	}
 	
 	public void setHasMoved(boolean hm){
@@ -39,6 +40,10 @@ public class ChessPiece {
 	}
 	public int getRow(){
 		return row;
+	}
+	
+	public char getSymbol(){
+		return this.symbol;
 	}
 	
 }
