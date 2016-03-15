@@ -36,9 +36,9 @@ public class Pawn extends ChessPiece {
 	@Override
 	public boolean isValid(int column, int row, ChessSpace[][] cb){
 
-		/*
-		Trying to implement taking opponent piece
-		------------------------------------------------------------------------------------------*/
+
+		//Implements eating opponent pieces
+		//-----------------------------------------------------------------------------------------
 		if(		(super.getColor()=='w' && cb[super.getColumn()+1][super.getRow()].getIsOccupied()) ||
 				(super.getColor()=='b' && cb[super.getColumn()-1][super.getRow()].getIsOccupied()) ) {
 
