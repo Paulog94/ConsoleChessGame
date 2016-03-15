@@ -42,7 +42,8 @@ public class chess {
 			char[] parser = move.toCharArray();
 
 			if((parser[0]>='a'&&parser[0]<='h') && (parser[3]>='a'&&parser[3]<='h')){
-				if(Character.isDigit(parser[1]) && Character.isDigit(parser[4]))
+				if(Character.isDigit(parser[1])&&(parser[1]-'0'<9 && parser[1]-'0' > 0)
+						&& Character.isDigit(parser[4])&&(parser[4]-'0'<9 && parser[4]-'0'>0))
 					return true;
 			}
 		}
@@ -57,7 +58,7 @@ public class chess {
 
 	public static int[] parseMove(String move){
 		char[] parser = move.toCharArray();
-		int positions[] = {LtoNum(parser[0]),(parser[1]-'0'),LtoNum(parser[3]),(parser[4]-'0')};
+		int positions[] = {LtoNum(parser[0]),(parser[1]-'0'-1),LtoNum(parser[3]),(parser[4]-'0'-1)};
 		return positions;
 	}
 
@@ -76,6 +77,7 @@ public class chess {
 		Scanner user = new Scanner(System.in);
 
 		//Starts the Game
+		//continues game until checkMate, resign or draw
 		while(!checkMate && !resign &&!draw) {
 			String Player;
 
@@ -104,11 +106,14 @@ public class chess {
 			}
 			else if(isValid(input)){
 				int[]moves = parseMove(input);
-
+				cb.move(moves[0],moves[1],moves[2],moves[3]);
+				/*
 				System.out.print(moves[0]);
 				System.out.print(moves[1]);
 				System.out.print(moves[2]);
 				System.out.println(moves[3]);
+				*/
+				cb.drawBoard();
 				turn++;
 			}
 			else

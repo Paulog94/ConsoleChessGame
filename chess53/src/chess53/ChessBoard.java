@@ -1,6 +1,7 @@
 package chess53;
 
 public class ChessBoard {
+	//Creates chessboard with an array of the chess Space object
 	static ChessSpace [][] chessBoard = new ChessSpace [8][8];
 
 	public ChessBoard(){
@@ -171,4 +172,18 @@ public class ChessBoard {
 		chessBoard[0][4].setPieceOn(wK1);
 		
 	}
+
+	public void move(int c1,int r1,int c2,int r2){
+		System.out.println("Piece on "+r1+","+c1+": "
+						+chessBoard[r1][c1].getPieceOn().getColor()
+						+chessBoard[r1][c1].getPieceOn().getSymbol()
+						+"\t move to:"+r2+","+c2);
+
+		chessBoard[r2][c2].setPieceOn(chessBoard[r1][c1].getPieceOn());
+		chessBoard[r2][c2].setIsOccupied(true);
+		chessBoard[r1][c1].setPieceOn(null);
+		chessBoard[r1][c1].setIsOccupied(false);
+
+	}
+
 }
