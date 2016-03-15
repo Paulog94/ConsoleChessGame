@@ -58,17 +58,14 @@ public class chess {
 
 	public static int[] parseMove(String move){
 		char[] parser = move.toCharArray();
-		int positions[] = {LtoNum(parser[0]),(parser[1]-'0'-1),LtoNum(parser[3]),(parser[4]-'0'-1)};
-		return positions;
+		return new int[]{LtoNum(parser[0]),(parser[1]-'0'-1),LtoNum(parser[3]),(parser[4]-'0'-1)};
 	}
 
 	public static void main(String[] args) {
 
-		boolean WhiteTurn = true;
 		boolean checkMate = false;
 		boolean resign = false;
 		boolean draw = false;
-		int d = 0, turn = 0;
 
 		ChessBoard cb = new ChessBoard();
 		cb.setBoard();
@@ -82,7 +79,7 @@ public class chess {
 			String Player;
 
 			//Checks whose turn it is;
-			if (turn%2==0) {
+			if (cb.turn%2==0) {
 				Player = "White";
 				System.out.print("\n"+Player+"'s move: ");
 			} else {
@@ -113,8 +110,8 @@ public class chess {
 				System.out.print(moves[2]);
 				System.out.println(moves[3]);
 				*/
+
 				cb.drawBoard();
-				turn++;
 			}
 			else
 				System.out.println(input+"\nIllegal move, try again");

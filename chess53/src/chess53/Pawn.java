@@ -33,4 +33,37 @@ public class Pawn extends ChessPiece {
 	}
 
 
+	@Override
+	public boolean isValid(int column, int row, ChessSpace[][] cb){
+
+		/*
+		Trying to implement taking opponent piece
+		------------------------------------------------------------------------------------------*/
+		if(		(super.getColor()=='w' && cb[super.getColumn()+1][super.getRow()].getIsOccupied()) ||
+				(super.getColor()=='b' && cb[super.getColumn()-1][super.getRow()].getIsOccupied()) ) {
+
+			if(Math.abs(super.getRow()-row)==1 &&
+					cb[column][row].getIsOccupied() &&
+					cb[column][row].getPieceOn().getSymbol()!=super.getSymbol()) {
+				return true;
+			}
+
+		}
+		else
+		//-----------------------------------------------------------------------------------------
+
+		if(!super.getHasMoved()){
+			if(super.getRow()==row && (Math.abs(super.getColumn()-column)<=2 && Math.abs(super.getColumn()-column)>0))
+				return true;
+		}
+		else
+			if(	(super.getColor()=='w' && super.getRow() == row && column - super.getColumn() == 1)||
+					(super.getColor()=='b' && super.getRow() == row && super.getColumn() - column == 1)){
+				return true;
+			}
+
+		return false;
+	}
+
+
 }

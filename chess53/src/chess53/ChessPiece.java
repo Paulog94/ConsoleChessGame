@@ -2,7 +2,7 @@ package chess53;
 
 public class ChessPiece {
 	private char color;
-	private boolean hasMoved;
+	private boolean hasMoved=false;
 	private int row;
 	private int column;
 	private char symbol;
@@ -41,9 +41,15 @@ public class ChessPiece {
 	public int getRow(){
 		return row;
 	}
+
+	public void setPosition(int column, int row){this.column = column;this.row = row;}
 	
 	public char getSymbol(){
 		return this.symbol;
 	}
+
+	public boolean isValid(int row, int column, ChessSpace[][] cb){
+		return true;
+	};
 	
 }
