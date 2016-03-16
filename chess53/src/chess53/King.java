@@ -1,11 +1,11 @@
 package chess53;
 
-import com.sun.rowset.internal.Row;
+//import com.sun.rowset.internal.Row;
 
 public class King extends ChessPiece {
 	private final char symbol = 'K';
-	private boolean castleKingSide;
-	private boolean castleQueensSide;
+	private boolean castleKingSide = false;
+	private boolean castleQueensSide = false;
 	public King(int row, int column, char color) {
 		super(row,column,color);
 	}

@@ -1,6 +1,6 @@
 package chess53;
 
-import com.sun.deploy.util.BlackList;
+//import com.sun.deploy.util.BlackList;
 
 import java.util.Scanner;
 
