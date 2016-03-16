@@ -2,10 +2,11 @@ package chess53;
 
 public class ChessPiece {
 	private char color;
-	private boolean hasMoved=false;
+	private boolean hasMoved = false;
 	private int row;
 	private int column;
 	private char symbol;
+	private boolean check = false;
 	
 	public ChessPiece(int row, int column, char color){
 		this.row = row;
@@ -13,7 +14,9 @@ public class ChessPiece {
 		this.color = color;
 		this.hasMoved = false;
 	}
-	
+	public void setCheck(boolean c){this.check = c;}
+	public boolean isChecked(){return this.check;}
+
 	public void setColor(char color){
 		this.color = color;
 	}
@@ -50,6 +53,7 @@ public class ChessPiece {
 
 	public boolean isValid(int row, int column, ChessSpace[][] cb){
 		return true;
-	};
+	}
+
 	
 }
