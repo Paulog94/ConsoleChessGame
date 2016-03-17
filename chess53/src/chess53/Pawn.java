@@ -44,7 +44,7 @@ public class Pawn extends ChessPiece {
 
 			if(Math.abs(super.getRow()-row)==1 &&
 					cb[column][row].getIsOccupied() &&
-					cb[column][row].getPieceOn().getSymbol()!=super.getSymbol()) {
+					cb[column][row].getPieceOn().getColor()!=super.getColor()) {
 				return true;
 			}
 

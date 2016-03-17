@@ -207,12 +207,7 @@ public class ChessBoard {
 	}
 
 	public void move(int column1,int row1,int column2,int row2){
-		/*
-		System.out.println("Piece on "+row1+","+row1+": "
-						+chessBoard[row1][column1].getPieceOn().getColor()
-						+chessBoard[row1][column1].getPieceOn().getSymbol()
-						+"\t move to:"+row2+","+column2);
-		*/
+
 
 		//Checks if first position is occupied
 		if(chessBoard[row1][column1].getIsOccupied()) {
@@ -233,16 +228,20 @@ public class ChessBoard {
 					//Sets original position to null and not occupied
 					chessBoard[row1][column1].setPieceOn(null);
 					chessBoard[row1][column1].setIsOccupied(false);
+
+					//Draws New board, next turn
+					System.out.println();
+					drawBoard();
 					this.turn++;
 					}
 				else
-					System.out.println("Illegal move, try again");
+					System.out.println("Illegal move, try again\n");
 				}
 			else
-				System.out.println("Illegal move, try again");
+				System.out.println("Illegal move, try again\n");
 			}
 		else
-			System.out.println("Illegal move, try again");
+			System.out.println("Illegal move, try again\n");
 	}
 
 }

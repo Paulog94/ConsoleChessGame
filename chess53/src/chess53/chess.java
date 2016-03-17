@@ -104,14 +104,7 @@ public class chess {
 			else if(isValid(input)){
 				int[]moves = parseMove(input);
 				cb.move(moves[0],moves[1],moves[2],moves[3]);
-				/*
-				System.out.print(moves[0]);
-				System.out.print(moves[1]);
-				System.out.print(moves[2]);
-				System.out.println(moves[3]);
-				*/
 
-				cb.drawBoard();
 			}
 			else
 				System.out.println(input+"\nIllegal move, try again");
