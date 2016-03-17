@@ -45,6 +45,7 @@ public class ChessPiece {
 		return row;
 	}
 
+	//Here is where the error is
 	public void setPosition(int column, int row){this.column = column;this.row = row;}
 	
 	public char getSymbol(){

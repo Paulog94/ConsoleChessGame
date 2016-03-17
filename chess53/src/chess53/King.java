@@ -4,8 +4,6 @@ package chess53;
 
 public class King extends ChessPiece {
 	private final char symbol = 'K';
-	private boolean castleKingSide = false;
-	private boolean castleQueensSide = false;
 	public King(int row, int column, char color) {
 		super(row,column,color);
 	}
@@ -22,6 +20,8 @@ public class King extends ChessPiece {
 
 		//Checks if the King Has moved before
 		if(!super.getHasMoved() && !super.isChecked()){
+
+			//Checks for CastleQueenSide
 			if((C1 == 0 && row == 2) &&
 					cb[column][0].getPieceOn().getSymbol() == 'R' &&
 					cb[column][0].getPieceOn().getColor()==super.getColor() &&
@@ -34,6 +34,7 @@ public class King extends ChessPiece {
 				return true;
 
 			}
+			//Checks for CastleKingSide
 			else
 			if((C1 == 0 && row == 6) &&
 					cb[column][7].getPieceOn().getSymbol() == 'R' &&

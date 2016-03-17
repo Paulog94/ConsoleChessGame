@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class chess {
 
+	//converts row letters to row numbers
 	public static int LtoNum(char L){
 		switch(L){
 			case 'a':{
@@ -37,6 +38,7 @@ public class chess {
 		}
 	}
 
+	//Checks if promotion Symbol is a correct symbol
 	public static Boolean isSymbol(char s){
 		switch(s){
 
@@ -58,6 +60,7 @@ public class chess {
 
 	}
 
+	//Checks if Input String is Valid
 	public static Boolean isValid(String move){
 		if(move.length()==5){
 			char[] parser = move.toCharArray();
@@ -83,6 +86,7 @@ public class chess {
 		return false;
 	}
 
+	//Helper Function to set User Input up for the Chess game
 	public static int[] parseMove(String move){
 		char[] parser = move.toCharArray();
 		return new int[]{LtoNum(parser[0]),(parser[1]-'0'-1),LtoNum(parser[3]),(parser[4]-'0'-1)};
@@ -128,6 +132,7 @@ public class chess {
 					break;
 				}
 			}
+			//Checks if the input is valid
 			else if(isValid(input)){
 				if(input.length()==5) {
 					int[] moves = parseMove(input);
@@ -135,7 +140,6 @@ public class chess {
 				}
 				else {
 					int[] moves = parseMove(input.substring(0,5));
-					//System.out.println("column1: "+moves[0]+"\nrow1: "+moves[1]+"\ncolumn2: "+moves[2]+"\nrow2: "+moves[3]);
 					cb.move(moves[0], moves[1], moves[2], moves[3],input.charAt(6));
 				}
 
