@@ -244,4 +244,64 @@ public class ChessBoard {
 			System.out.println("Illegal move, try again\n");
 	}
 
+	//Accepts Promotion for Pawn
+	public void move(int column1,int row1,int column2,int row2,char Symbol){
+
+		//Checks if first position is occupied
+		if(chessBoard[row1][column1].getIsOccupied()) {
+
+			//Checks if a destination is a valid destination for a promotion
+			if(		(turn%2==0 && chessBoard[row1][column1].getPieceOn().getColor()=='w' && row2 == 7)||
+					(turn%2==1 && chessBoard[row1][column1].getPieceOn().getColor()=='b' && row2 == 0)) {
+
+				//Checks if its a Pawn that is set to move
+				if (chessBoard[row1][column1].getPieceOn() instanceof Pawn) {
+
+					//Checks if the move is valid
+					if (chessBoard[row1][column1].getPieceOn().isValid(row2, column2, chessBoard)) {
+
+						//Promotes the Pawn according to the symbol associated with the move
+						chessBoard[row2][column2].setPieceOn(promotion(Symbol, row2, column2, chessBoard[row1][column1].getPieceOn().getColor()));
+						chessBoard[row2][column2].setIsOccupied(true);
+
+						//Sets original Position to Empty
+						chessBoard[row1][column1].setPieceOn(null);
+						chessBoard[row1][column1].setIsOccupied(false);
+
+						//Draws New board, next turn
+						System.out.println();
+						drawBoard();
+						this.turn++;
+					}
+					else
+						System.out.println("Illegal move, try again\n");
+				}
+				else
+					System.out.println("Illegal move, try again\n");
+			}
+			else
+				System.out.println("Illegal move, try again\n");
+		}
+		else
+			System.out.println("Illegal move, try again\n");
+	}
+
+	//Promotes Pawn and sets the new Promoted piece
+	public ChessPiece promotion(char S,int row, int column, char color){
+		switch(S){
+
+			case 'N':
+				return new Knight(row,column,color);
+
+			case 'B':
+				return new Bishop(row,column,color);
+
+			case 'R':
+				return new Rook(row,column,color);
+
+			default:
+				return new Queen(row,column,color);
+		}
+	}
+
 }

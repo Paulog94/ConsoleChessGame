@@ -37,23 +37,50 @@ public class chess {
 		}
 	}
 
+	public static Boolean isSymbol(char s){
+		switch(s){
+
+			case 'R':
+				return true;
+
+			case 'N':
+				return true;
+
+			case 'B':
+				return true;
+
+			case 'Q':
+				return true;
+
+			default:
+				return false;
+		}
+
+	}
+
 	public static Boolean isValid(String move){
 		if(move.length()==5){
 			char[] parser = move.toCharArray();
 
-			if((parser[0]>='a'&&parser[0]<='h') && (parser[3]>='a'&&parser[3]<='h')){
-				if(Character.isDigit(parser[1])&&(parser[1]-'0'<9 && parser[1]-'0' > 0)
-						&& Character.isDigit(parser[4])&&(parser[4]-'0'<9 && parser[4]-'0'>0))
+			if((parser[0]>='a'&& parser[0]<='h') && (parser[3]>='a'&& parser[3]<='h') && parser[2]==' '){
+				if(Character.isDigit(parser[1]) && (parser[1]-'0'<9 && parser[1]-'0' > 0) &&
+						Character.isDigit(parser[4]) && (parser[4]-'0'<9 && parser[4]-'0'>0))
+					return true;
+			}
+		}
+		else
+		if(move.length()==7){
+
+			char[] parser = move.toCharArray();
+
+			if((parser[0]>='a'&& parser[0]<='h') && (parser[3]>='a'&& parser[3]<='h') && parser[2]==' ' && parser[5]==' '){
+				if(Character.isDigit(parser[1]) && (parser[1]-'0'<9 && parser[1]-'0' > 0) &&
+						Character.isDigit(parser[4]) && (parser[4]-'0'<9 && parser[4]-'0'>0) &&
+						isSymbol(parser[6]))
 					return true;
 			}
 		}
 		return false;
-	}
-
-	public static void nextTurn(Boolean w){
-		if(w)
-			w = false;
-		else w = true;
 	}
 
 	public static int[] parseMove(String move){
@@ -102,8 +129,15 @@ public class chess {
 				}
 			}
 			else if(isValid(input)){
-				int[]moves = parseMove(input);
-				cb.move(moves[0],moves[1],moves[2],moves[3]);
+				if(input.length()==5) {
+					int[] moves = parseMove(input);
+					cb.move(moves[0], moves[1], moves[2], moves[3]);
+				}
+				else {
+					int[] moves = parseMove(input.substring(0,5));
+					//System.out.println("column1: "+moves[0]+"\nrow1: "+moves[1]+"\ncolumn2: "+moves[2]+"\nrow2: "+moves[3]);
+					cb.move(moves[0], moves[1], moves[2], moves[3],input.charAt(6));
+				}
 
 			}
 			else
