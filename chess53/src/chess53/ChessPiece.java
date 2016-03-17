@@ -7,12 +7,14 @@ public class ChessPiece {
 	private int column;
 	private char symbol;
 	private boolean check = false;
-	
+	private boolean captured = false;
+
 	public ChessPiece(int row, int column, char color){
 		this.row = row;
 		this.column = column;
 		this.color = color;
 		this.hasMoved = false;
+		this.captured = false;
 	}
 	public void setCheck(boolean c){this.check = c;}
 	public boolean isChecked(){return this.check;}
@@ -23,7 +25,7 @@ public class ChessPiece {
 	public char getColor(){
 		return this.color;
 	}
-	
+
 	public void setHasMoved(boolean hm){
 		this.hasMoved = hm;
 	}
@@ -37,7 +39,7 @@ public class ChessPiece {
 	public int getColumn(){
 		return column;
 	}
-	
+
 	public void setRow(int row){
 		this.row = row;
 	}
@@ -45,9 +47,10 @@ public class ChessPiece {
 		return row;
 	}
 
-	//Here is where the error is
-	public void setPosition(int column, int row){this.column = column;this.row = row;}
-	
+	public void setPosition(int row, int column){
+		this.column = column;this.row = row;
+	}
+
 	public char getSymbol(){
 		return this.symbol;
 	}
@@ -55,6 +58,14 @@ public class ChessPiece {
 	public boolean isValid(int row, int column, ChessSpace[][] cb){
 		return true;
 	}
-
 	
+	public boolean getCaptured(){
+		return captured;
+	}
+	
+	public void setCaptured(boolean sc){
+		this.captured = sc;
+	}
+
+
 }
