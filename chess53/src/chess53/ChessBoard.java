@@ -219,21 +219,47 @@ public class ChessBoard {
 				//Checks if the move is valid based on the piece
 				if (chessBoard[row1][column1].getPieceOn().isValid(row2, column2, chessBoard)) {
 
-					//Moves the Piece
-					chessBoard[row2][column2].setPieceOn(chessBoard[row1][column1].getPieceOn());
-					chessBoard[row2][column2].setIsOccupied(true);
-					chessBoard[row2][column2].getPieceOn().setPosition(row2,column2);
-					chessBoard[row2][column2].getPieceOn().setHasMoved(true);
-
-					//Sets original position to null and not occupied
-					chessBoard[row1][column1].setPieceOn(null);
-					chessBoard[row1][column1].setIsOccupied(false);
-
-					//Draws New board, next turn
-					System.out.println();
-					drawBoard();
-					this.turn++;
+					//Sets up white pawn promotion
+					if(turn%2==0 && chessBoard[row1][column1].getPieceOn() instanceof Pawn && row2 == 7){
+						chessBoard[row2][column2].setPieceOn(promotion('Q',row2,column2,'w'));
+						chessBoard[row2][column2].setIsOccupied(true);
+						//Sets original position to null and not occupied
+						chessBoard[row1][column1].setPieceOn(null);
+						chessBoard[row1][column1].setIsOccupied(false);
+						//Draws New board, next turn
+						System.out.println();
+						drawBoard();
+						this.turn++;
 					}
+					//Sets up black pawn default promotion
+					else if (turn%2==1 && chessBoard[row1][column1].getPieceOn() instanceof Pawn && row2 == 0){
+						chessBoard[row2][column2].setPieceOn(promotion('Q',row2,column2,'b'));
+						chessBoard[row2][column2].setIsOccupied(true);
+						//Sets original position to null and not occupied
+						chessBoard[row1][column1].setPieceOn(null);
+						chessBoard[row1][column1].setIsOccupied(false);
+						//Draws New board, next turn
+						System.out.println();
+						drawBoard();
+						this.turn++;
+					}
+					else {
+						//Moves the Piece
+						chessBoard[row2][column2].setPieceOn(chessBoard[row1][column1].getPieceOn());
+						chessBoard[row2][column2].setIsOccupied(true);
+						chessBoard[row2][column2].getPieceOn().setPosition(row2, column2);
+						chessBoard[row2][column2].getPieceOn().setHasMoved(true);
+
+						//Sets original position to null and not occupied
+						chessBoard[row1][column1].setPieceOn(null);
+						chessBoard[row1][column1].setIsOccupied(false);
+
+						//Draws New board, next turn
+						System.out.println();
+						drawBoard();
+						this.turn++;
+					}
+				}
 				else
 					System.out.println("Illegal move, try again\n");
 				}
