@@ -8,6 +8,7 @@ public class ChessPiece {
 	private char symbol;
 	private boolean check = false;
 	private boolean captured = false;
+	private int turnMoved;
 
 	public ChessPiece(int row, int column, char color){
 		this.row = row;
@@ -50,6 +51,9 @@ public class ChessPiece {
 	public void setPosition(int row, int column){
 		this.column = column;this.row = row;
 	}
+
+	public void setTurnMoved(int t){this.turnMoved = t;}
+	public int getTurnMoved(){return turnMoved;}
 
 	public char getSymbol(){
 		return this.symbol;

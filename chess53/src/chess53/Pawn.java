@@ -41,9 +41,10 @@ public class Pawn extends ChessPiece {
 			 	{
 					return true;
 				}
+				//checks for enPassant
 				else if(enPassant(row, column, cb)){
-					//cb[super.getRow()][column].setPieceOn(null);
-					//cb[super.getRow()][column].setIsOccupied(false);
+					cb[super.getRow()][column].setPieceOn(null);
+					cb[super.getRow()][column].setIsOccupied(false);
 					return true;
 				}
 			}
@@ -88,9 +89,8 @@ public class Pawn extends ChessPiece {
 		if(cb[super.getRow()][column].getIsOccupied() || cb[super.getRow()][column].getIsOccupied()){
 
 			if(cb[super.getRow()][column].getPieceOn() instanceof Pawn ){
-				if(((Pawn) cb[super.getRow()][column].getPieceOn()).getDoubleMoved()) {
-					cb[super.getRow()][column].setPieceOn(null);
-					cb[super.getRow()][column].setIsOccupied(false);
+				if(((Pawn) cb[super.getRow()][column].getPieceOn()).getDoubleMoved() &&
+						cb[super.getRow()][column].getPieceOn().getTurnMoved() == (super.getTurnMoved()-1)) {
 				return true;
 				}
 			}

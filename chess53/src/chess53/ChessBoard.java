@@ -218,13 +218,14 @@ public class ChessBoard {
 			//Checks if its White's turn or Black's turn
 			if(		(turn%2==0 && chessBoard[row1][column1].getPieceOn().getColor()=='w' )||
 					(turn%2==1 && chessBoard[row1][column1].getPieceOn().getColor()=='b')) {
-
+				chessBoard[row1][column1].getPieceOn().setTurnMoved(turn);
 				//Checks if the move is valid based on the piece
 				if (chessBoard[row1][column1].getPieceOn().isValid(row2, column2, chessBoard)) {
 
 					//Sets up white pawn promotion
 					if(turn%2==0 && chessBoard[row1][column1].getPieceOn() instanceof Pawn && row2 == 7){
 						chessBoard[row2][column2].setPieceOn(promotion('Q',row2,column2,'w'));
+						chessBoard[row2][column2].getPieceOn().setTurnMoved(turn);
 						chessBoard[row2][column2].setIsOccupied(true);
 						//Sets original position to null and not occupied
 						chessBoard[row1][column1].setPieceOn(null);
@@ -237,6 +238,7 @@ public class ChessBoard {
 					//Sets up black pawn default promotion
 					else if (turn%2==1 && chessBoard[row1][column1].getPieceOn() instanceof Pawn && row2 == 0){
 						chessBoard[row2][column2].setPieceOn(promotion('Q',row2,column2,'b'));
+						chessBoard[row2][column2].getPieceOn().setTurnMoved(turn);
 						chessBoard[row2][column2].setIsOccupied(true);
 						//Sets original position to null and not occupied
 						chessBoard[row1][column1].setPieceOn(null);
@@ -256,6 +258,7 @@ public class ChessBoard {
 						chessBoard[row2][column2].setPieceOn(chessBoard[row1][column1].getPieceOn());
 						chessBoard[row2][column2].setIsOccupied(true);
 						chessBoard[row2][column2].getPieceOn().setPosition(row2, column2);
+						chessBoard[row2][column2].getPieceOn().setTurnMoved(turn);
 						chessBoard[row2][column2].getPieceOn().setHasMoved(true);
 
 						//Sets original position to null and not occupied
@@ -263,7 +266,7 @@ public class ChessBoard {
 						chessBoard[row1][column1].setIsOccupied(false);
 
 						//Draws New board, next turn
-						System.out.println();
+						System.out.println("Piece's TurnMoved: "+chessBoard[row2][column2].getPieceOn().getTurnMoved());
 						drawBoard();
 						turn++;
 						System.out.println(turn);
@@ -272,8 +275,10 @@ public class ChessBoard {
 				else
 					System.out.println("Illegal move, try again\n");
 				}
-			else
+			else {
+				chessBoard[row1][column1].getPieceOn().setTurnMoved(turn--);
 				System.out.println("Illegal move, try again\n");
+			}
 			}
 		else
 			System.out.println("Illegal move, try again\n");
@@ -297,6 +302,7 @@ public class ChessBoard {
 
 						//Promotes the Pawn according to the symbol associated with the move
 						chessBoard[row2][column2].setPieceOn(promotion(Symbol, row2, column2, chessBoard[row1][column1].getPieceOn().getColor()));
+						chessBoard[row2][column2].getPieceOn().setTurnMoved(turn);
 						chessBoard[row2][column2].setIsOccupied(true);
 
 						//Sets original Position to Empty

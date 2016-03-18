@@ -74,6 +74,7 @@ public class King extends ChessPiece {
 
 		return false;
 	}
+
 	public void CastleQueenSide(int row, ChessSpace[][] chessBoard){
 		chessBoard[row][3].setPieceOn(chessBoard[row][0].getPieceOn());
 		chessBoard[row][3].setIsOccupied(true);
