@@ -13,7 +13,7 @@ public class King extends ChessPiece {
 	}
 
 	@Override
-	public boolean isValid(int column, int row, ChessSpace[][] cb){
+	public boolean isValid(int row, int column, ChessSpace[][] cb){
 
 		int C1 = Math.abs(super.getColumn()-column);
 		int R1 = Math.abs(super.getRow()- row);
@@ -22,39 +22,39 @@ public class King extends ChessPiece {
 		if(!super.getHasMoved() && !super.isChecked()){
 
 			//Checks for CastleQueenSide
-			if((C1 == 0 && row == 2) &&
-					cb[column][0].getPieceOn().getSymbol() == 'R' &&
-					cb[column][0].getPieceOn().getColor()==super.getColor() &&
-					!cb[column][0].getPieceOn().getHasMoved() &&
-					!cb[column][1].getIsOccupied() &&
-					!cb[column][2].getIsOccupied() &&
-					!cb[column][3].getIsOccupied()){
+			if((R1 == 0 && column == 2) &&
+					cb[row][0].getPieceOn().getSymbol() == 'R' &&
+					cb[row][0].getPieceOn().getColor()==super.getColor() &&
+					!cb[row][0].getPieceOn().getHasMoved() &&
+					!cb[row][1].getIsOccupied() &&
+					!cb[row][2].getIsOccupied() &&
+					!cb[row][3].getIsOccupied()){
 
-				CastleQueenSide(column,cb);
+				CastleQueenSide(row,cb);
 				return true;
 
 			}
 			//Checks for CastleKingSide
 			else
-			if((C1 == 0 && row == 6) &&
-					cb[column][7].getPieceOn().getSymbol() == 'R' &&
-					cb[column][7].getPieceOn().getColor()==super.getColor() &&
-					!cb[column][7].getPieceOn().getHasMoved() &&
-					!cb[column][6].getIsOccupied() &&
-					!cb[column][5].getIsOccupied()){
+			if((R1 == 0 && column == 6) &&
+					cb[row][7].getPieceOn().getSymbol() == 'R' &&
+					cb[row][7].getPieceOn().getColor()==super.getColor() &&
+					!cb[row][7].getPieceOn().getHasMoved() &&
+					!cb[row][6].getIsOccupied() &&
+					!cb[row][5].getIsOccupied()){
 
-				CastleKingsSide(column,cb);
+				CastleKingsSide(row,cb);
 				return true;
 
 			}
 			else
 			if((R1 == 0 && C1 ==1)||(R1 == 1 && C1 ==0)||(R1 == 1 && C1 ==1)){
 
-				if(!cb[column][row].getIsOccupied()){
+				if(!cb[row][column].getIsOccupied()){
 					return true;
 				}
 				else
-					if(cb[column][row].getColor() != super.getColor()){
+					if(cb[row][column].getColor() != super.getColor()){
 						return true;
 					}
 			}
@@ -63,33 +63,35 @@ public class King extends ChessPiece {
 			//Logic for a King's movement for 1 space at a time
 		if((R1 == 0 && C1 ==1)||(R1 == 1 && C1 ==0)||(R1 == 1 && C1 ==1)){
 
-			if(!cb[column][row].getIsOccupied()){
+			if(!cb[row][column].getIsOccupied()){
 				return true;
 			}
 			else
-			if(cb[column][row].getColor() != super.getColor()){
+			if(cb[row][column].getColor() != super.getColor()){
 				return true;
 			}
 		}
 
 		return false;
 	}
-	public void CastleQueenSide(int column, ChessSpace[][] chessBoard){
-		chessBoard[column][3].setPieceOn(chessBoard[column][0].getPieceOn());
-		chessBoard[column][3].setIsOccupied(true);
-		chessBoard[column][3].getPieceOn().setHasMoved(true);
+	public void CastleQueenSide(int row, ChessSpace[][] chessBoard){
+		chessBoard[row][3].setPieceOn(chessBoard[row][0].getPieceOn());
+		chessBoard[row][3].setIsOccupied(true);
+		chessBoard[row][3].getPieceOn().setHasMoved(true);
+		chessBoard[row][3].getPieceOn().setPosition(row,3);
 
-		chessBoard[column][0].setPieceOn(null);
-		chessBoard[column][0].setIsOccupied(false);
+		chessBoard[row][0].setPieceOn(null);
+		chessBoard[row][0].setIsOccupied(false);
 	}
 
-	public void CastleKingsSide(int column, ChessSpace[][] chessBoard){
-		chessBoard[column][5].setPieceOn(chessBoard[column][7].getPieceOn());
-		chessBoard[column][5].setIsOccupied(true);
-		chessBoard[column][5].getPieceOn().setHasMoved(true);
+	public void CastleKingsSide(int row, ChessSpace[][] chessBoard){
+		chessBoard[row][5].setPieceOn(chessBoard[row][7].getPieceOn());
+		chessBoard[row][5].setIsOccupied(true);
+		chessBoard[row][5].getPieceOn().setHasMoved(true);
+		chessBoard[row][5].getPieceOn().setPosition(row,5);
 
-		chessBoard[column][7].setPieceOn(null);
-		chessBoard[column][7].setIsOccupied(false);
+		chessBoard[row][7].setPieceOn(null);
+		chessBoard[row][7].setIsOccupied(false);
 	}
 
 }

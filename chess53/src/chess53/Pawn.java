@@ -2,7 +2,8 @@ package chess53;
 
 public class Pawn extends ChessPiece {
 	private final char symbol = 'p';
-
+	private boolean doubleMoved = false;
+	private boolean enPassant = false;
 	
 
 	public Pawn(int row, int column, char color) {
