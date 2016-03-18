@@ -3,7 +3,6 @@ package chess53;
 public class Pawn extends ChessPiece {
 	private final char symbol = 'p';
 	private boolean doubleMoved = false;
-	private boolean enPassant = false;
 	
 
 	public Pawn(int row, int column, char color) {
@@ -14,6 +13,7 @@ public class Pawn extends ChessPiece {
 	public char getSymbol(){
 		return symbol;
 	}
+	public boolean getDoubleMoved(){return doubleMoved;}
 
 	@Override
 	public boolean isValid(int row, int column, ChessSpace[][] cb){
@@ -21,7 +21,7 @@ public class Pawn extends ChessPiece {
 		if(eatPiece(row,column,cb))
 			return true;
 
-		else if(movePawn(row,column,cb))
+		else if(movePawn(row, column, cb))
 				return true;
 
 		return false;
@@ -35,9 +35,17 @@ public class Pawn extends ChessPiece {
 			int C1 = Math.abs(super.getColumn()-column);
 			int R1 = Math.abs(super.getRow()- row);
 
-			if( (C1==1 && R1==1) && cb[row][column].getIsOccupied() &&
-					cb[row][column].getPieceOn().getColor()!=super.getColor()) {
-				return true;
+			if( (C1==1 && R1==1)) {
+				if( cb[row][column].getIsOccupied() &&
+						cb[row][column].getPieceOn().getColor()!=super.getColor())
+			 	{
+					return true;
+				}
+				else if(enPassant(row, column, cb)){
+					//cb[super.getRow()][column].setPieceOn(null);
+					//cb[super.getRow()][column].setIsOccupied(false);
+					return true;
+				}
 			}
 			else
 			if((R1 == 1 && C1 == 0) && !cb[row][column].getIsOccupied()){
@@ -48,7 +56,7 @@ public class Pawn extends ChessPiece {
 		return false;
 	}
 
-	//Pawns movement for double move
+	//Pawns movement for double move and normal move
 	public boolean movePawn(int row, int column, ChessSpace[][] cb){
 		if(		((super.getColor()=='w' && row > super.getRow() ) ||
 				(super.getColor()=='b' && row < super.getRow() )) &&
@@ -57,9 +65,11 @@ public class Pawn extends ChessPiece {
 			if (!super.getHasMoved()) {
 				if (super.getColumn() == column && (Math.abs(super.getRow() - row) == 2)){
 					if( (super.getColor()== 'w' && !(cb[super.getRow()+1][column].getIsOccupied()))){
+						doubleMoved = true;
 						return true;
 					}
 					if(	(super.getColor()== 'b' && !(cb[super.getRow()-1][column].getIsOccupied()))) {
+						doubleMoved = true;
 						return true;
 					}
 				}
@@ -73,4 +83,18 @@ public class Pawn extends ChessPiece {
 		return false;
 	}
 
+	public boolean enPassant(int row, int column, ChessSpace[][] cb){
+
+		if(cb[super.getRow()][column].getIsOccupied() || cb[super.getRow()][column].getIsOccupied()){
+
+			if(cb[super.getRow()][column].getPieceOn() instanceof Pawn ){
+				if(((Pawn) cb[super.getRow()][column].getPieceOn()).getDoubleMoved()) {
+					cb[super.getRow()][column].setPieceOn(null);
+					cb[super.getRow()][column].setIsOccupied(false);
+				return true;
+				}
+			}
+		}
+		return false;
+	}
 }
