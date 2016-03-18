@@ -11,7 +11,7 @@ public class Queen extends ChessPiece {
 		return symbol;
 	}
 
-	public boolean isValid(int column, int row, ChessSpace[][] cb){
+	public boolean isValid(int row, int column, ChessSpace[][] cb){
 
 		int cR = super.getRow();
 		int cC = super.getColumn();

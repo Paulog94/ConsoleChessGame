@@ -232,7 +232,7 @@ public class ChessBoard {
 						//Draws New board, next turn
 						System.out.println();
 						drawBoard();
-						this.turn++;
+						turn++;
 					}
 					//Sets up black pawn default promotion
 					else if (turn%2==1 && chessBoard[row1][column1].getPieceOn() instanceof Pawn && row2 == 0){
@@ -244,9 +244,14 @@ public class ChessBoard {
 						//Draws New board, next turn
 						System.out.println();
 						drawBoard();
-						this.turn++;
+						turn++;
 					}
 					else {
+						//clears captured piece if needed
+						if (chessBoard[row2][column2].getIsOccupied()){
+							chessBoard[row2][column2].getPieceOn().setCaptured(true);
+						}
+						
 						//Moves the Piece
 						chessBoard[row2][column2].setPieceOn(chessBoard[row1][column1].getPieceOn());
 						chessBoard[row2][column2].setIsOccupied(true);
@@ -260,7 +265,8 @@ public class ChessBoard {
 						//Draws New board, next turn
 						System.out.println();
 						drawBoard();
-						this.turn++;
+						turn++;
+						System.out.println(turn);
 					}
 				}
 				else
@@ -300,7 +306,7 @@ public class ChessBoard {
 						//Draws New board, next turn
 						System.out.println();
 						drawBoard();
-						this.turn++;
+						turn++;
 					}
 					else
 						System.out.println("Illegal move, try again\n");

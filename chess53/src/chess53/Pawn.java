@@ -15,37 +15,37 @@ public class Pawn extends ChessPiece {
 	}
 
 	@Override
-	public boolean isValid(int column, int row, ChessSpace[][] cb){
+	public boolean isValid(int row, int column, ChessSpace[][] cb){
 
 
 		//Implements eating opponent pieces
 		//-----------------------------------------------------------------------------------------
-		if(		(super.getColor()=='w' && column == (super.getColumn()+1)) ||
-				(super.getColor()=='b' && column == (super.getColumn()-1)) ) {
+		if(		(super.getColor()=='w' && row == (super.getRow()+1)) ||
+				(super.getColor()=='b' && row == (super.getRow()-1)) ) {
 
 			int C1 = Math.abs(super.getColumn()-column);
 			int R1 = Math.abs(super.getRow()- row);
 
-			if( (C1==1 && R1==1) && cb[column][row].getIsOccupied() &&
-					cb[column][row].getPieceOn().getColor()!=super.getColor()) {
+			if( (C1==1 && R1==1) && cb[row][column].getIsOccupied() &&
+					cb[row][column].getPieceOn().getColor()!=super.getColor()) {
 				return true;
 			}
 			else
-				if((R1 == 0 && C1 == 1) && !cb[column][row].getIsOccupied()){
+				if((R1 == 1 && C1 == 0) && !cb[row][column].getIsOccupied()){
 					return true;
 				}
 
 		}
 		else
 		//-----------------------------------------------------------------------------------------
-			if(		(super.getColor()=='w' && column > super.getColumn()) ||
-					(super.getColor()=='b' && column < super.getColumn()) ) {
+			if(		(super.getColor()=='w' && row > super.getRow()) ||
+					(super.getColor()=='b' && row < super.getRow()) ) {
 
 				if (!super.getHasMoved()) {
-					if (super.getRow() == row && (Math.abs(super.getColumn() - column) <= 2 && Math.abs(super.getColumn() - column) > 0))
+					if (super.getColumn() == column && (Math.abs(super.getRow() - row) <= 2 && Math.abs(super.getRow() - row) > 0))
 						return true;
-				} else if ((super.getColor() == 'w' && super.getRow() == row && column - super.getColumn() == 1) ||
-						(super.getColor() == 'b' && super.getRow() == row && super.getColumn() - column == 1)) {
+				} else if ((super.getColor() == 'w' && super.getColumn() == column && row - super.getRow() == 1) ||
+						(super.getColor() == 'b' && super.getColumn() == column && super.getRow() - row == 1)) {
 					return true;
 				}
 			}
