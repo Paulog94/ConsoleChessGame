@@ -9,7 +9,7 @@ public class ChessPiece {
 	private boolean check = false;
 	private boolean captured = false;
 	private int turnMoved;
-
+	
 	public ChessPiece(int row, int column, char color){
 		this.row = row;
 		this.column = column;

@@ -18,7 +18,7 @@ public class ChessSpace {
 		this.pieceOn = null;
 	}
 	
-	public ChessSpace (int row,int column, char color, char colorOn, ChessPiece pieceOn){
+	public ChessSpace (int row,int column, char color, ChessPiece pieceOn){
 		this.color = color;
 		this.column = column;
 		this.row = row;
