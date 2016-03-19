@@ -48,11 +48,6 @@ public class Pawn extends ChessPiece {
 					return true;
 				}
 			}
-			else
-			if((R1 == 1 && C1 == 0) && !cb[row][column].getIsOccupied()){
-				return true;
-			}
-
 		}
 		return false;
 	}
@@ -73,6 +68,10 @@ public class Pawn extends ChessPiece {
 						doubleMoved = true;
 						return true;
 					}
+				}
+				else if ((super.getColor() == 'w' && super.getColumn() == column && row - super.getRow() == 1) ||
+						(super.getColor() == 'b' && super.getColumn() == column && super.getRow() - row == 1)) {
+					return true;
 				}
 			}
 			else if ((super.getColor() == 'w' && super.getColumn() == column && row - super.getRow() == 1) ||

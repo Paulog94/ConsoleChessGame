@@ -62,6 +62,8 @@ public class ChessPiece {
 	public boolean isValid(int row, int column, ChessSpace[][] cb){
 		return true;
 	}
+
+	public boolean eatPiece(int row, int column, ChessSpace[][] cb){return true;};
 	
 	public boolean getCaptured(){
 		return captured;
