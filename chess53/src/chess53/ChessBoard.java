@@ -546,8 +546,91 @@ public class ChessBoard {
 				}
 			}
 		}
-		
-		// lastly we trace path between checker and checkee and see if anyone can block. 
+
+		// lastly we trace path between checker and checkee and see if anyone can block.
+		if((currentKing == whiteKing)&&(!blackCheckers.isEmpty())){
+			updatePieces();
+			for (ChessPiece cp : blackCheckers){
+				if ((cp instanceof Knight) || (cp instanceof Pawn)) {
+					return true;
+				}else{
+					int dR = cp.getRow();
+					int dC = cp.getColumn();
+					if ((dR > cR)&&(dC == cC)){
+						for(int i = (cR+1); i < dR; i++){
+							for (ChessPiece bp : whitePieces){
+								if(bp.isValid(i, cC, chessBoard)){
+									return false;
+								}
+							}
+						}
+					}
+					if ((cR > dR) && (cC == dC)){
+						for(int i = (cR-1); i > dR; i--){
+							for (ChessPiece bp : whitePieces){
+								if(bp.isValid(i, cC, chessBoard)){
+									return false;
+								}
+							}
+						}	
+					}
+					if ((dC > cC) && (dR == cR)){
+						for(int i = (cC+1); i < dC; i++){
+							for (ChessPiece bp : whitePieces){
+								if(bp.isValid(cR, i, chessBoard)){
+									return false;
+								}
+							}
+						}
+					}
+					if ((cC > dC) && (dR == cR)){
+						for(int i = (cC-1); i > dC; i--){
+							for (ChessPiece bp : whitePieces){
+								if(bp.isValid(cR, i, chessBoard)){
+									return false;
+								}
+							}
+						}	
+					}
+					if ((dR < cR) && (dC < cC)){
+						for(int i = (cR-1), j = (cC -1); i > dR; i--, j--){
+							for (ChessPiece bp : whitePieces){
+								if(bp.isValid(i, j, chessBoard)){
+									return false;
+								}
+							}
+						}
+					}
+					if ((dR > cR) && (dC < cC)) {
+						for(int i = (cR+1), j = (cC -1); i < dR; i++, j--){
+							for (ChessPiece bp : whitePieces){
+								if(bp.isValid(i, j, chessBoard)){
+									return false;
+								}
+							}
+						}	
+					}
+					if ((dR > cR) && (dC > cC)){
+						for(int i = (cR+1), j = (cC +1); i < dR; i++, j++){
+							for (ChessPiece bp : whitePieces){
+								if(bp.isValid(i, j, chessBoard)){
+									return false;
+								}
+							}
+						}
+					}
+					if ((dR < cR) && (dC > cC)){
+						for(int i = (cR-1), j = (cC +1); i > dR; i--, j++){
+							for (ChessPiece bp : whitePieces){
+								if(bp.isValid(i, j, chessBoard)){
+									return false;
+								}
+							}
+						}	
+					}
+				}
+			}
+		}
 		return true;
 	}
 }
