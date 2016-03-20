@@ -352,7 +352,7 @@ public class ChessBoard {
 					System.out.println("Illegal move, try again\n");
 			}
 			else {
-				chessBoard[row1][column1].getPieceOn().setTurnMoved(turn--);
+				chessBoard[row1][column1].getPieceOn().setTurnMoved(turn-1);
 				System.out.println("Illegal move, try again\n");
 			}
 		}
