@@ -343,21 +343,22 @@ public class ChessBoard {
 						//Checks for any Check
 						System.out.println();
 						drawBoard();
+						takenPiece = null;
 						updatePieces();
 						check();
 						turn++;
 					}
 				}
 				else
-					System.out.println("Illegal move, try again\n");
+					System.out.println("Illegal move, try again  1 \n");
 			}
 			else {
 				chessBoard[row1][column1].getPieceOn().setTurnMoved(turn-1);
-				System.out.println("Illegal move, try again\n");
+				System.out.println("Illegal move, try again  2  \n");
 			}
 		}
 		else
-			System.out.println("Illegal move, try again\n");
+			System.out.println("Illegal move, try again  3  \n");
 	}
 
 	//Accepts Promotion for Pawn
