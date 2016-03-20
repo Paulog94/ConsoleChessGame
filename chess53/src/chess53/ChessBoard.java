@@ -10,6 +10,8 @@ public class ChessBoard {
 	static ChessPiece whiteKing;
 	static ChessPiece blackKing;
 	public static int turn = 0;
+	static ArrayList<ChessPiece> checkers = new ArrayList<ChessPiece>();
+	public static ChessPiece takenPiece = null;
 
 	public ChessBoard(){
 
@@ -42,7 +44,7 @@ public class ChessBoard {
 					System.out.print(currentSpace.getPieceOn().getColor());
 					System.out.print(currentSpace.getPieceOn().getSymbol());
 					System.out.print(' ');
-					
+
 				}
 			}
 			System.out.println(i+1);
@@ -91,47 +93,47 @@ public class ChessBoard {
 		chessBoard[6][7].setIsOccupied(true);
 		chessBoard[6][7].setPieceOn(bp8);
 		//blackPieces[7] = bp8;
-		
+
 		ChessPiece bR1 = new Rook(7,0,'b');
 		chessBoard[7][0].setIsOccupied(true);
 		chessBoard[7][0].setPieceOn(bR1);
 		//blackPieces[8] = bR1;
-		
+
 		ChessPiece bR2 = new Rook(7,7,'b');
 		chessBoard[7][7].setIsOccupied(true);
 		chessBoard[7][7].setPieceOn(bR2);
 		//blackPieces[9] = bR2;
-		
+
 		ChessPiece bN1 = new Knight(7,1,'b');
 		chessBoard[7][1].setIsOccupied(true);
 		chessBoard[7][1].setPieceOn(bN1);
 		//blackPieces[10] = bN1;
-		
+
 		ChessPiece bN2 = new Knight(7,6,'b');
 		chessBoard[7][6].setIsOccupied(true);
 		chessBoard[7][6].setPieceOn(bN2);
 		//blackPieces[11] = bN2;
-		
+
 		ChessPiece bB1 = new Bishop(7,2,'b');
 		chessBoard[7][2].setIsOccupied(true);
 		chessBoard[7][2].setPieceOn(bB1);
 		//blackPieces[12] = bB1;
-		
+
 		ChessPiece bB2 = new Bishop(7,5,'b');
 		chessBoard[7][5].setIsOccupied(true);
 		chessBoard[7][5].setPieceOn(bB2);
 		//blackPieces[13] = bB2;
-		
+
 		ChessPiece bQ1 = new Queen(7,3,'b');
 		chessBoard[7][3].setIsOccupied(true);
 		chessBoard[7][3].setPieceOn(bQ1);
 		//blackPieces[14] = bQ1;
-		
+
 		ChessPiece bK1 = new King(7,4,'b');
 		chessBoard[7][4].setIsOccupied(true);
 		chessBoard[7][4].setPieceOn(bK1);
 		//blackPieces[15] = bK1;
-		
+
 		ChessPiece wp1 = new Pawn(1,0,'w');
 		chessBoard[1][0].setIsOccupied(true);
 		chessBoard[1][0].setPieceOn(wp1);
@@ -146,67 +148,67 @@ public class ChessBoard {
 		chessBoard[1][2].setIsOccupied(true);
 		chessBoard[1][2].setPieceOn(wp3);
 		//whitePieces[2] = wp3;
-		
+
 		ChessPiece wp4 = new Pawn(1,3,'w');
 		chessBoard[1][3].setIsOccupied(true);
 		chessBoard[1][3].setPieceOn(wp4);
 		//whitePieces[3] = wp4;
-		
+
 		ChessPiece wp5 = new Pawn(1,4,'w');
 		chessBoard[1][4].setIsOccupied(true);
 		chessBoard[1][4].setPieceOn(wp5);
 		//whitePieces[4] = wp5;
-		
+
 		ChessPiece wp6 = new Pawn(1,5,'w');
 		chessBoard[1][5].setIsOccupied(true);
 		chessBoard[1][5].setPieceOn(wp6);
 		//whitePieces[5] = wp6;
-		
+
 		ChessPiece wp7 = new Pawn(1,6,'w');
 		chessBoard[1][6].setIsOccupied(true);
 		chessBoard[1][6].setPieceOn(wp7);
 		///whitePieces[6] = wp7;
-		
+
 		ChessPiece wp8 = new Pawn(1,7,'w');
 		chessBoard[1][7].setIsOccupied(true);
 		chessBoard[1][7].setPieceOn(wp8);
 		//whitePieces[7] = wp8;
-		
+
 		ChessPiece wR1 = new Rook(0,0,'w');
 		chessBoard[0][0].setIsOccupied(true);
 		chessBoard[0][0].setPieceOn(wR1);
 		//whitePieces[8] = wR1;
-		
+
 		ChessPiece wR2 = new Rook(0,7,'w');
 		chessBoard[0][7].setIsOccupied(true);
 		chessBoard[0][7].setPieceOn(wR2);
 		//whitePieces[9] = wR2;
-		
+
 		ChessPiece wN1 = new Knight(0,1,'w');
 		chessBoard[0][1].setIsOccupied(true);
 		chessBoard[0][1].setPieceOn(wN1);
 		//whitePieces[10] = wN1;
-		
+
 		ChessPiece wN2 = new Knight(0,6,'w');
 		chessBoard[0][6].setIsOccupied(true);
 		chessBoard[0][6].setPieceOn(wN2);
 		//whitePieces[11] = wN2;
-		
+
 		ChessPiece wB1 = new Bishop(0,2,'w');
 		chessBoard[0][2].setIsOccupied(true);
 		chessBoard[0][2].setPieceOn(wB1);
 		//whitePieces[12] = wB1;
-		
+
 		ChessPiece wB2 = new Bishop(0,5,'w');
 		chessBoard[0][5].setIsOccupied(true);
 		chessBoard[0][5].setPieceOn(wB2);
 		//whitePieces[13] = wB2;
-		
+
 		ChessPiece wQ1 = new Queen(0,3,'w');
 		chessBoard[0][3].setIsOccupied(true);
 		chessBoard[0][3].setPieceOn(wQ1);
 		//whitePieces[14] = wQ1;
-		
+
 		ChessPiece wK1 = new King(0,4,'w');
 		chessBoard[0][4].setIsOccupied(true);
 		chessBoard[0][4].setPieceOn(wK1);
@@ -286,7 +288,7 @@ public class ChessBoard {
 				chessBoard[row1][column1].getPieceOn().setTurnMoved(turn);
 
 				//Checks if the move is valid based on the piece
-				if (chessBoard[row1][column1].getPieceOn().isValid(row2, column2, chessBoard)) {
+				if ((chessBoard[row1][column1].getPieceOn().isValid(row2, column2, chessBoard))&&(!selfCheck(row1, column1, row2, column2))) {
 
 					//Sets up white pawn promotion
 					if(turn%2==0 && chessBoard[row1][column1].getPieceOn() instanceof Pawn && row2 == 7){
@@ -319,15 +321,17 @@ public class ChessBoard {
 						turn++;
 					}
 					else {
-						//clears captured piece if needed
+						//clears captured piece if needed and marks it in case it needs to go back
 						if (chessBoard[row2][column2].getIsOccupied()){
+							takenPiece = chessBoard[row2][column2].getPieceOn();
 							chessBoard[row2][column2].getPieceOn().setCaptured(true);
 						}
-						
+
 						//Moves the Piece
 						chessBoard[row2][column2].setPieceOn(chessBoard[row1][column1].getPieceOn());
 						chessBoard[row2][column2].setIsOccupied(true);
 						chessBoard[row2][column2].getPieceOn().setPosition(row2, column2);
+
 						chessBoard[row2][column2].getPieceOn().setTurnMoved(turn);
 						chessBoard[row2][column2].getPieceOn().setHasMoved(true);
 
@@ -346,12 +350,12 @@ public class ChessBoard {
 				}
 				else
 					System.out.println("Illegal move, try again\n");
-				}
+			}
 			else {
 				chessBoard[row1][column1].getPieceOn().setTurnMoved(turn-1);
 				System.out.println("Illegal move, try again\n");
 			}
-			}
+		}
 		else
 			System.out.println("Illegal move, try again\n");
 	}
@@ -405,18 +409,51 @@ public class ChessBoard {
 	public ChessPiece promotion(char S,int row, int column, char color){
 		switch(S){
 
-			case 'N':
-				return new Knight(row,column,color);
+		case 'N':
+			return new Knight(row,column,color);
 
-			case 'B':
-				return new Bishop(row,column,color);
+		case 'B':
+			return new Bishop(row,column,color);
 
-			case 'R':
-				return new Rook(row,column,color);
+		case 'R':
+			return new Rook(row,column,color);
 
-			default:
-				return new Queen(row,column,color);
+		default:
+			return new Queen(row,column,color);
 		}
 	}
 
+	//test if you are putting yourself in check
+	public boolean selfCheck (int r1, int c1, int r2, int c2){
+		if (chessBoard[r2][c2].getIsOccupied()){
+			takenPiece = chessBoard[r2][c2].getPieceOn();
+			chessBoard[r2][c2].getPieceOn().setCaptured(true);
+		}
+		chessBoard[r2][c2].setPieceOn(chessBoard[r1][c1].getPieceOn());
+		chessBoard[r2][c2].setIsOccupied(true);
+		chessBoard[r2][c2].getPieceOn().setPosition(r2, c2);
+		updatePieces();
+		if (((turn%2 == 0)&&(BlackCheck()))||((turn%2 == 1)&&(WhiteCheck()))) {
+
+			chessBoard[r1][c1].setPieceOn(chessBoard[r2][c2].getPieceOn());
+			chessBoard[r2][c2].setIsOccupied(false);
+			chessBoard[r1][c1].getPieceOn().setPosition(r1, c1);
+			if (takenPiece != null){
+				chessBoard[r2][c2].setPieceOn(takenPiece);
+				takenPiece.setPosition(r1, c1);
+				takenPiece = null;
+			}
+			System.out.println("Illeagal Move! you can not leave yourself in check. try again");
+			return true;
+		}else {
+			chessBoard[r1][c1].setPieceOn(chessBoard[r2][c2].getPieceOn());
+			chessBoard[r2][c2].setIsOccupied(false);
+			chessBoard[r1][c1].getPieceOn().setPosition(r1, c1);
+			if (takenPiece != null){
+				chessBoard[r2][c2].setPieceOn(takenPiece);
+				takenPiece.setPosition(r1, c1);
+				takenPiece = null;
+			}
+		}return false;
+	}
 }
