@@ -440,6 +440,7 @@ public class ChessBoard {
 			chessBoard[r1][c1].setPieceOn(chessBoard[r2][c2].getPieceOn());
 			chessBoard[r1][c1].setIsOccupied(true);
 			chessBoard[r1][c1].getPieceOn().setPosition(r1, c1);
+			// puts back the captured piece.
 			if (takenPiece != null){
 				chessBoard[r2][c2].setPieceOn(takenPiece);
 				takenPiece.setPosition(r2, c2);
