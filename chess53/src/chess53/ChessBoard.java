@@ -10,7 +10,8 @@ public class ChessBoard {
 	static ChessPiece whiteKing;
 	static ChessPiece blackKing;
 	public static int turn = 0;
-	static ArrayList<ChessPiece> checkers = new ArrayList<ChessPiece>();
+	static ArrayList<ChessPiece> blackCheckers = new ArrayList<ChessPiece>();
+	static ArrayList<ChessPiece> whiteCheckers = new ArrayList<ChessPiece>();
 	public static ChessPiece takenPiece = null;
 
 	public ChessBoard(){
@@ -242,10 +243,12 @@ public class ChessBoard {
 			if (p.isValid(blackKing.getRow(), blackKing.getColumn(), chessBoard)) {
 				if (p instanceof Pawn) {
 					if (p.eatPiece(blackKing.getRow(), blackKing.getColumn(), chessBoard)) {
+						whiteCheckers.add(p);
 						return true;
 					}
 				}
 				else {
+					whiteCheckers.add(p);
 					return true;
 				}
 			}
@@ -259,10 +262,12 @@ public class ChessBoard {
 			if (p.isValid(whiteKing.getRow(), whiteKing.getColumn(), chessBoard)) {
 				if (p instanceof Pawn) {
 					if (p.eatPiece(whiteKing.getRow(), whiteKing.getColumn(), chessBoard)) {
+						blackCheckers.add(p);
 						return true;
 					}
 				}
 				else {
+					blackCheckers.add(p);
 					return true;
 				}
 			}
@@ -467,5 +472,58 @@ public class ChessBoard {
 				chessBoard[r2][c2].setIsOccupied(false);
 			}
 		}return false;
+	}
+	
+	public boolean checkMate(){
+		//test if king can move out of check
+		ChessPiece currentKing;
+		if(turn%2 == 0){
+			currentKing = whiteKing;
+		}else{
+			currentKing = blackKing;
+		}
+		int cR = currentKing.getRow();
+		int cC = currentKing.getColumn();
+		if((cR+1 < 8)&&(cC-1 >= 0)&&(currentKing.isValid(cR+1, cC-1, chessBoard))){
+			if(!selfCheck(cR,cC,cR+1,cC-1)){
+				return false;
+			}
+		}
+		if((cR+1 < 8)&&(currentKing.isValid(cR+1, cC, chessBoard))){
+			if(!selfCheck(cR,cC,cR+1,cC)){
+				return false;
+			}
+		}
+		if((cR+1 < 8)&&(cC+1 < 8)&&(currentKing.isValid(cR+1, cC+1, chessBoard))){
+			if(!selfCheck(cR,cC,cR+1,cC+1)){
+				return false;
+			}
+		}
+		if((cC-1 >= 0)&&(currentKing.isValid(cR, cC-1, chessBoard))){
+			if(!selfCheck(cR,cC,cR,cC-1)){
+				return false;
+			}
+		}
+		if((cC-1 < 8)&&(currentKing.isValid(cR, cC+1, chessBoard))){
+			if(!selfCheck(cR,cC,cR,cC+1)){
+				return false;
+			}
+		}
+		if((cR-1 >= 0)&&(cC-1 >= 0)&&(currentKing.isValid(cR-1, cC-1, chessBoard))){
+			if(!selfCheck(cR,cC,cR-1,cC-1)){
+				return false;
+			}
+		}
+		if((cR-1 >= 0)&&(currentKing.isValid(cR-1, cC, chessBoard))){
+			if(!selfCheck(cR,cC,cR-1,cC)){
+				return false;
+			}
+		}
+		if((cR-1 >= 0)&&(cC+1 < 8)&&(currentKing.isValid(cR-1, cC+1, chessBoard))){
+			if(!selfCheck(cR,cC,cR-1,cC+1)){
+				return false;
+			}
+		}
+		return true;
 	}
 }
