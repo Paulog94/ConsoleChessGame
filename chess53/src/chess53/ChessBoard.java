@@ -432,27 +432,37 @@ public class ChessBoard {
 		chessBoard[r2][c2].setPieceOn(chessBoard[r1][c1].getPieceOn());
 		chessBoard[r2][c2].setIsOccupied(true);
 		chessBoard[r2][c2].getPieceOn().setPosition(r2, c2);
+		chessBoard[r1][c1].setPieceOn(null);
+		chessBoard[r1][c1].setIsOccupied(false);
 		updatePieces();
 		if (((turn%2 == 0)&&(BlackCheck()))||((turn%2 == 1)&&(WhiteCheck()))) {
-
+			//reset board after check
 			chessBoard[r1][c1].setPieceOn(chessBoard[r2][c2].getPieceOn());
-			chessBoard[r2][c2].setIsOccupied(false);
+			chessBoard[r1][c1].setIsOccupied(true);
 			chessBoard[r1][c1].getPieceOn().setPosition(r1, c1);
 			if (takenPiece != null){
 				chessBoard[r2][c2].setPieceOn(takenPiece);
-				takenPiece.setPosition(r1, c1);
+				takenPiece.setPosition(r2, c2);
+				chessBoard[r2][c2].setIsOccupied(true);
 				takenPiece = null;
+			}else{
+				chessBoard[r2][c2].setPieceOn(null);
+				chessBoard[r2][c2].setIsOccupied(false);
 			}
 			System.out.println("Illeagal Move! you can not leave yourself in check. try again");
 			return true;
 		}else {
 			chessBoard[r1][c1].setPieceOn(chessBoard[r2][c2].getPieceOn());
-			chessBoard[r2][c2].setIsOccupied(false);
+			chessBoard[r1][c1].setIsOccupied(true);
 			chessBoard[r1][c1].getPieceOn().setPosition(r1, c1);
 			if (takenPiece != null){
 				chessBoard[r2][c2].setPieceOn(takenPiece);
-				takenPiece.setPosition(r1, c1);
+				takenPiece.setPosition(r2, c2);
+				chessBoard[r2][c2].setIsOccupied(true);
 				takenPiece = null;
+			}else{
+				chessBoard[r2][c2].setPieceOn(null);
+				chessBoard[r2][c2].setIsOccupied(false);
 			}
 		}return false;
 	}
