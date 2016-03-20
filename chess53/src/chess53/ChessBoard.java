@@ -473,7 +473,7 @@ public class ChessBoard {
 			}
 		}return false;
 	}
-	
+
 	public boolean checkMate(){
 		//test if king can move out of check
 		ChessPiece currentKing;
@@ -524,6 +524,30 @@ public class ChessBoard {
 				return false;
 			}
 		}
+		// Next we see if anyone can take out the offending piece.
+
+		if((currentKing == whiteKing)&&(!blackCheckers.isEmpty())){
+			updatePieces();
+			for (ChessPiece cp : blackCheckers){
+				for (ChessPiece wp : whitePieces){
+					if (wp.isValid(cp.getRow(), cp.getColumn(), chessBoard)){
+						return false;
+					}
+				}
+			}
+		}
+		if((currentKing == blackKing)&&(!whiteCheckers.isEmpty())){
+			updatePieces();
+			for (ChessPiece cp : whiteCheckers){
+				for (ChessPiece bp : blackPieces){
+					if (bp.isValid(cp.getRow(), cp.getColumn(), chessBoard)){
+						return false;
+					}
+				}
+			}
+		}
+		
+		// lastly we trace path between checker and checkee and see if anyone can block. 
 		return true;
 	}
 }
