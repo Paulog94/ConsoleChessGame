@@ -13,6 +13,8 @@ public class ChessBoard {
 	static ArrayList<ChessPiece> blackCheckers = new ArrayList<ChessPiece>();
 	static ArrayList<ChessPiece> whiteCheckers = new ArrayList<ChessPiece>();
 	public static ChessPiece takenPiece = null;
+	public static boolean whiteInCheck = false;
+	public static boolean blackInCheck = false;
 
 	public ChessBoard(){
 
@@ -244,11 +246,15 @@ public class ChessBoard {
 				if (p instanceof Pawn) {
 					if (p.eatPiece(blackKing.getRow(), blackKing.getColumn(), chessBoard)) {
 						whiteCheckers.add(p);
+						blackInCheck = true;
+						blackKing.setCheck(true);
 						return true;
 					}
 				}
 				else {
 					whiteCheckers.add(p);
+					blackInCheck = true;
+					blackKing.setCheck(true);
 					return true;
 				}
 			}
@@ -263,11 +269,15 @@ public class ChessBoard {
 				if (p instanceof Pawn) {
 					if (p.eatPiece(whiteKing.getRow(), whiteKing.getColumn(), chessBoard)) {
 						blackCheckers.add(p);
+						whiteInCheck = true;
+						whiteKing.setCheck(true);
 						return true;
 					}
 				}
 				else {
 					blackCheckers.add(p);
+					whiteInCheck = true;
+					whiteKing.setCheck(true);
 					return true;
 				}
 			}
@@ -309,6 +319,13 @@ public class ChessBoard {
 						updatePieces();
 						check();
 						turn++;
+						System.out.println(turn+ " -1");
+						if((whiteInCheck)||(blackInCheck)){
+							if(checkMate()){
+								chess.checkMate = true;
+								System.out.println("and Mate!");
+							}
+						}
 					}
 					//Sets up black pawn default promotion
 					else if (turn%2==1 && chessBoard[row1][column1].getPieceOn() instanceof Pawn && row2 == 0){
@@ -324,6 +341,13 @@ public class ChessBoard {
 						updatePieces();
 						check();
 						turn++;
+						System.out.println(turn+ "-2");
+						if((whiteInCheck)||(blackInCheck)){
+							if(checkMate()){
+								chess.checkMate = true;
+								System.out.println("and Mate!");
+							}
+						}
 					}
 					else {
 						//clears captured piece if needed and marks it in case it needs to go back
@@ -352,6 +376,13 @@ public class ChessBoard {
 						updatePieces();
 						check();
 						turn++;
+						System.out.println(turn+ "-3");
+						if((whiteInCheck)||(blackInCheck)){
+							if(checkMate()){
+								chess.checkMate = true;
+								System.out.println("and Mate!");
+							}
+						}
 					}
 				}
 				else

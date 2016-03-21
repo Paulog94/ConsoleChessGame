@@ -5,6 +5,8 @@ package chess53;
 import java.util.Scanner;
 
 public class chess {
+	
+	static boolean checkMate = false;
 
 	//converts row letters to row numbers
 	public static int LtoNum(char L){
@@ -94,7 +96,7 @@ public class chess {
 
 	public static void main(String[] args) {
 
-		boolean checkMate = false;
+		
 		boolean resign = false;
 		boolean draw = false;
 

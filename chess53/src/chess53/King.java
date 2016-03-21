@@ -7,7 +7,7 @@ public class King extends ChessPiece {
 	public King(int row, int column, char color) {
 		super(row,column,color);
 	}
-	
+
 	public char getSymbol(){
 		return symbol;
 	}
@@ -36,41 +36,41 @@ public class King extends ChessPiece {
 			}
 			//Checks for CastleKingSide
 			else
-			if((R1 == 0 && column == 6) &&
-					cb[row][7].getPieceOn().getSymbol() == 'R' &&
-					cb[row][7].getPieceOn().getColor()==super.getColor() &&
-					!cb[row][7].getPieceOn().getHasMoved() &&
-					!cb[row][6].getIsOccupied() &&
-					!cb[row][5].getIsOccupied()){
+				if((R1 == 0 && column == 6) &&
+						cb[row][7].getPieceOn().getSymbol() == 'R' &&
+						cb[row][7].getPieceOn().getColor()==super.getColor() &&
+						!cb[row][7].getPieceOn().getHasMoved() &&
+						!cb[row][6].getIsOccupied() &&
+						!cb[row][5].getIsOccupied()){
 
-				CastleKingsSide(row,cb);
-				return true;
+					CastleKingsSide(row,cb);
+					return true;
 
-			}
-			else
+				}
+				else
+					if((R1 == 0 && C1 ==1)||(R1 == 1 && C1 ==0)||(R1 == 1 && C1 ==1)){
+
+						if(!cb[row][column].getIsOccupied()){
+							return true;
+						}
+						else
+							if(cb[row][column].getPieceOn().getColor() != super.getColor()){
+								return true;
+							}
+					}
+		}
+		else
+			//Logic for a King's movement for 1 space at a time
 			if((R1 == 0 && C1 ==1)||(R1 == 1 && C1 ==0)||(R1 == 1 && C1 ==1)){
 
 				if(!cb[row][column].getIsOccupied()){
 					return true;
 				}
 				else
-					if(cb[row][column].getColor() != super.getColor()){
+					if(cb[row][column].getPieceOn().getColor() != super.getColor()){
 						return true;
 					}
 			}
-		}
-		else
-			//Logic for a King's movement for 1 space at a time
-		if((R1 == 0 && C1 ==1)||(R1 == 1 && C1 ==0)||(R1 == 1 && C1 ==1)){
-
-			if(!cb[row][column].getIsOccupied()){
-				return true;
-			}
-			else
-			if(cb[row][column].getColor() != super.getColor()){
-				return true;
-			}
-		}
 
 		return false;
 	}
