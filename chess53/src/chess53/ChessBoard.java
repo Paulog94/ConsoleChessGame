@@ -556,13 +556,16 @@ public class ChessBoard {
 			}
 		}
 		// Next we see if anyone can take out the offending piece.
+		//except the king, that would have been found in stage 1.
 
 		if((currentKing == whiteKing)&&(!blackCheckers.isEmpty())){
 			updatePieces();
 			for (ChessPiece cp : blackCheckers){
 				for (ChessPiece wp : whitePieces){
-					if (wp.isValid(cp.getRow(), cp.getColumn(), chessBoard)){
-						return false;
+					if(wp != whiteKing){
+						if (wp.isValid(cp.getRow(), cp.getColumn(), chessBoard)){
+							return false;
+						}
 					}
 				}
 			}
@@ -571,8 +574,10 @@ public class ChessBoard {
 			updatePieces();
 			for (ChessPiece cp : whiteCheckers){
 				for (ChessPiece bp : blackPieces){
-					if (bp.isValid(cp.getRow(), cp.getColumn(), chessBoard)){
-						return false;
+					if (bp != blackKing){
+						if (bp.isValid(cp.getRow(), cp.getColumn(), chessBoard)){
+							return false;
+						}
 					}
 				}
 			}
