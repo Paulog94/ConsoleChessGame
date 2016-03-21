@@ -1,16 +1,41 @@
 package chess53;
 
+/**
+ *
+ * Queen Piece Class
+ * identifies movements that are valid to a specific Queen
+ *
+ * @author Joshua Cross and Paulo Garcia
+ */
 public class Queen extends ChessPiece {
 	private final char symbol = 'Q';
 
+	/**
+	 * Initializes Queen Piece
+	 * @param row initial row
+	 * @param column initial column
+	 * @param color team color
+	 */
 	public Queen(int row, int column, char color) {
 		super(row,column,color);
 	}
-	
+
+	/**
+	 * Gets symbol
+	 * @return symbol
+	 */
 	public char getSymbol(){
 		return symbol;
 	}
 
+	/**
+	 * Boolean that validates Queen movement
+	 *
+	 * @param row destination row
+	 * @param column destination column
+	 * @param cb board to check on
+	 * @return true false
+	 */
 	public boolean isValid(int row, int column, ChessSpace[][] cb){
 
 		int cR = super.getRow();

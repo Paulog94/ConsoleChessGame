@@ -1,14 +1,21 @@
 package chess53;
-
-//import com.sun.deploy.util.BlackList;
-
 import java.util.Scanner;
 
+/**
+ * Chess Driver used to start the game
+ *
+ * @author Paulo and Joshua Cross
+ */
 public class chess {
 	
 	static boolean checkMate = false;
 
-	//converts row letters to row numbers
+	/**
+	 * Converts row letters to row numbers
+	 *
+	 * @param L char to convert a-h
+	 * @return integer that represents the char
+	 */
 	public static int LtoNum(char L){
 		switch(L){
 			case 'a':{
@@ -40,7 +47,12 @@ public class chess {
 		}
 	}
 
-	//Checks if promotion Symbol is a correct symbol
+	/**
+	 * Checks if promotion Symbol is a correct symbol
+	 *
+	 * @param s char to use as symbol Q,N,B,R
+	 * @return if symbol is one of those used
+	 */
 	public static Boolean isSymbol(char s){
 		switch(s){
 
@@ -62,7 +74,13 @@ public class chess {
 
 	}
 
-	//Checks if Input String is Valid
+	/**
+	 * Checks if User input String is Valid
+	 * Uses isSymbol
+	 *
+	 * @param move
+	 * @return is valid
+	 */
 	public static Boolean isValid(String move){
 		if(move.length()==5){
 			char[] parser = move.toCharArray();
@@ -88,12 +106,24 @@ public class chess {
 		return false;
 	}
 
-	//Helper Function to set User Input up for the Chess game
+	/**
+	 * Helper Function to set User Input up for the Chess game
+	 * Parses User Input to inputs needed for ChessBoard.java
+	 *
+	 * @param move user input
+	 * @return Board input moves[]
+	 */
 	public static int[] parseMove(String move){
 		char[] parser = move.toCharArray();
 		return new int[]{LtoNum(parser[0]),(parser[1]-'0'-1),LtoNum(parser[3]),(parser[4]-'0'-1)};
 	}
 
+	/**
+	 * Runs ChessBoard.java
+	 * Allows for user Inputs
+	 *
+	 * @param args User inputs
+	 */
 	public static void main(String[] args) {
 
 		

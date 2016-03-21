@@ -2,6 +2,14 @@ package chess53;
 
 import java.util.ArrayList;
 
+/**
+ * ChessBoard class
+ * implements a static chessboard which is an array of chess spaces
+ * sets the board upon initialization
+ * implements piece movement
+ *
+ * @author Joshua Cross and Paulo Garcia
+ */
 public class ChessBoard {
 	//Creates chessboard with an array of the chess Space object
 	static ChessSpace [][] chessBoard = new ChessSpace [8][8];
@@ -16,6 +24,10 @@ public class ChessBoard {
 	public static boolean whiteInCheck = false;
 	public static boolean blackInCheck = false;
 
+	/**
+	 * Initializes the static ChessBoard of the class
+	 * Sets color of each space
+	 */
 	public ChessBoard(){
 
 		int total = 0;
@@ -32,7 +44,9 @@ public class ChessBoard {
 		}
 	}
 
-	//Draws Board
+	/**
+	 * Draws Board for the User Interface
+	 */
 	public void drawBoard(){
 		for(int i = 7; i >= 0; i--){
 			for (int j = 0; j < 8; j++){
@@ -55,7 +69,10 @@ public class ChessBoard {
 		System.out.println(" a  b  c  d  e  f  g  h");
 	}
 
-	//Sets Pieces for initial game
+	/**
+	 * Sets Pieces on the ChessBoard for a new
+	 * Chess game
+	 */
 	public void setBoard(){
 		ChessPiece bp1 = new Pawn(6,0,'b');
 		chessBoard[6][0].setIsOccupied(true);
@@ -218,6 +235,11 @@ public class ChessBoard {
 		//whitePieces[15] = wK1;
 	}
 
+	/**
+	 * Updates Pieces for live blackPieces
+	 * and live whitePieces
+	 * Updates blackKingPosition and WhiteKingPosition
+	 */
 	public void updatePieces() {
 		whitePieces.clear();
 		blackPieces.clear();
@@ -239,7 +261,12 @@ public class ChessBoard {
 		}
 	}
 
-	//White Check
+	/**
+	 * White Check
+	 * Uses all live pieces to check if it can reacch a blackKing
+	 * sets King check to true if true
+	 * @return true or false
+	 */
 	public boolean WhiteCheck() {
 		for (ChessPiece p : whitePieces) {
 			if (p.isValid(blackKing.getRow(), blackKing.getColumn(), chessBoard)) {
@@ -259,10 +286,18 @@ public class ChessBoard {
 				}
 			}
 		}
+		whiteCheckers.clear();
+		blackInCheck = false;
+		blackKing.setCheck(false);
 		return false;
 	}
 
-	//Black Check
+	/**
+	 * Black Check
+	 * Uses all live pieces to check if it can reacch a whiteKing
+	 * Sets King check to true if true
+	 * @return true or false
+	 */
 	public boolean BlackCheck(){
 		for (ChessPiece p : blackPieces) {
 			if (p.isValid(whiteKing.getRow(), whiteKing.getColumn(), chessBoard)) {
@@ -282,16 +317,30 @@ public class ChessBoard {
 				}
 			}
 		}
+		blackCheckers.clear();
+		whiteInCheck = false;
+		whiteKing.setCheck(false);
 		return false;
 	}
 
-	//Used to print out check for either black or white
+	/**
+	 * Used to print out check for either black or white check
+	 */
 	public void check(){
 		if(WhiteCheck() || BlackCheck())
 			System.out.print("\nCheck");
 	}
 
-	//Moves pieces based on user input and Chess Rules
+	/**
+	 * Moves pieces based on user input and Chess Rules
+	 * Uses Promotion, Check, Checkmate, and DrawBoard
+	 * updates turn if successful
+	 *
+	 * @param column1 Target Piece column
+	 * @param row1 TargetPiece Row
+	 * @param column2 Destination Column
+	 * @param row2 Destination Row
+	 */
 	public void move(int column1,int row1,int column2,int row2){
 
 		//Checks if first position is occupied
@@ -319,11 +368,17 @@ public class ChessBoard {
 						updatePieces();
 						check();
 						turn++;
-						System.out.println(turn+ " -1");
+						//System.out.println(turn+ " -1");
 						if((whiteInCheck)||(blackInCheck)){
-							if(checkMate()){
-								chess.checkMate = true;
-								System.out.println("and Mate!");
+							if(checkMate()) {
+								if (turn % 2 == 1) {
+									chess.checkMate = true;
+									System.out.println("\nwhite wins");
+								}
+								else{
+									chess.checkMate = true;
+									System.out.println("\nblack wins");
+								}
 							}
 						}
 					}
@@ -341,11 +396,17 @@ public class ChessBoard {
 						updatePieces();
 						check();
 						turn++;
-						System.out.println(turn+ "-2");
+						//System.out.println(turn+ "-2");
 						if((whiteInCheck)||(blackInCheck)){
-							if(checkMate()){
-								chess.checkMate = true;
-								System.out.println("and Mate!");
+							if(checkMate()) {
+								if (turn % 2 == 1) {
+									chess.checkMate = true;
+									System.out.println("\nwhite wins");
+								}
+								else{
+									chess.checkMate = true;
+									System.out.println("\nblack wins");
+								}
 							}
 						}
 					}
@@ -376,28 +437,43 @@ public class ChessBoard {
 						updatePieces();
 						check();
 						turn++;
-						System.out.println(turn+ "-3");
+						//System.out.println(turn+ "-3");
 						if((whiteInCheck)||(blackInCheck)){
-							if(checkMate()){
-								chess.checkMate = true;
-								System.out.println("and Mate!");
+							if(checkMate()) {
+								if (turn % 2 == 1) {
+									chess.checkMate = true;
+									System.out.println("\nwhite wins");
+								}
+								else{
+									chess.checkMate = true;
+									System.out.println("\nblack wins");
+								}
 							}
 						}
 					}
 				}
 				else
-					System.out.println("Illegal move, try again  1 \n");
+					System.out.println("Illegal move, try again \n");
 			}
 			else {
 				chessBoard[row1][column1].getPieceOn().setTurnMoved(turn-1);
-				System.out.println("Illegal move, try again  2  \n");
+				System.out.println("Illegal move, try again \n");
 			}
 		}
 		else
-			System.out.println("Illegal move, try again  3  \n");
+			System.out.println("Illegal move, try again \n");
 	}
 
-	//Accepts Promotion for Pawn
+	/**
+	 * Accepts Promotion for Pawn Symbol
+	 * Works the same as the other Move
+	 *
+	 * @param column1 Target Piece column
+	 * @param row1 TargetPiece Row
+	 * @param column2 Destination Column
+	 * @param row2 Destination Row
+	 * @param Symbol Symbol for Chess Piece (Q,N,B,R)
+	 */
 	public void move(int column1,int row1,int column2,int row2,char Symbol){
 
 		//Checks if first position is occupied
@@ -428,6 +504,18 @@ public class ChessBoard {
 						updatePieces();
 						check();
 						turn++;
+						if((whiteInCheck)||(blackInCheck)){
+							if(checkMate()) {
+								if (turn % 2 == 1) {
+									chess.checkMate = true;
+									System.out.println("\nwhite wins");
+								}
+								else{
+									chess.checkMate = true;
+									System.out.println("\nblack wins");
+								}
+							}
+						}
 					}
 					else
 						System.out.println("Illegal move, try again\n");
@@ -442,7 +530,15 @@ public class ChessBoard {
 			System.out.println("Illegal move, try again\n");
 	}
 
-	//Promotes Pawn and sets the new Promoted piece
+	/**
+	 * Promotes Pawn and sets the new Promoted piece
+	 *
+	 * @param S
+	 * @param row
+	 * @param column
+	 * @param color
+	 * @return Returns promoted ChessPiece
+	 */
 	public ChessPiece promotion(char S,int row, int column, char color){
 		switch(S){
 
@@ -460,7 +556,15 @@ public class ChessBoard {
 		}
 	}
 
-	//test if you are putting yourself in check
+	/**
+	 * test if you are putting yourself in check
+	 *
+	 * @param r1 initial row
+	 * @param c1 initial column
+	 * @param r2 destination row
+	 * @param c2 destination column
+	 * @return true false
+	 */
 	public boolean selfCheck (int r1, int c1, int r2, int c2){
 		if (chessBoard[r2][c2].getIsOccupied()){
 			takenPiece = chessBoard[r2][c2].getPieceOn();
@@ -487,7 +591,7 @@ public class ChessBoard {
 				chessBoard[r2][c2].setPieceOn(null);
 				chessBoard[r2][c2].setIsOccupied(false);
 			}
-			System.out.println("Illeagal Move! you can not leave yourself in check. try again");
+			//System.out.println("Illegal move, try again");
 			return true;
 		}else {
 			chessBoard[r1][c1].setPieceOn(chessBoard[r2][c2].getPieceOn());
@@ -505,6 +609,10 @@ public class ChessBoard {
 		}return false;
 	}
 
+	/**
+	 * Returns if a Piece is on Checkmate
+	 * @return true or false
+	 */
 	public boolean checkMate(){
 		//test if king can move out of check
 		ChessPiece currentKing;

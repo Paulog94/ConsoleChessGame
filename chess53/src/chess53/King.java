@@ -1,17 +1,44 @@
 package chess53;
 
-//import com.sun.rowset.internal.Row;
-
+/**
+ *
+ * King Piece Class
+ * identifies movements that are valid to a specific King
+ * Allows Castling
+ *
+ * @author Joshua Cross and Paulo Garcia
+ */
 public class King extends ChessPiece {
 	private final char symbol = 'K';
+
+	/**
+	 * Constructs King
+	 *
+	 * @param row
+	 * @param column
+	 * @param color
+	 */
 	public King(int row, int column, char color) {
 		super(row,column,color);
 	}
 
+	/**
+	 * Gets Symbol
+	 *
+	 * @return Symbol
+	 */
 	public char getSymbol(){
 		return symbol;
 	}
 
+	/**
+	 * Boolean that Validates moves for a King piece
+	 *
+	 * @param row	destination row
+	 * @param column	destination column
+	 * @param cb	board to check
+	 * @return true or false
+	 */
 	@Override
 	public boolean isValid(int row, int column, ChessSpace[][] cb){
 
@@ -75,6 +102,12 @@ public class King extends ChessPiece {
 		return false;
 	}
 
+	/**
+	 * Initiates Castle Queen Side for a King Piece
+	 *
+	 * @param row row to use
+	 * @param chessBoard board to use
+	 */
 	public void CastleQueenSide(int row, ChessSpace[][] chessBoard){
 		chessBoard[row][3].setPieceOn(chessBoard[row][0].getPieceOn());
 		chessBoard[row][3].setIsOccupied(true);
@@ -85,6 +118,12 @@ public class King extends ChessPiece {
 		chessBoard[row][0].setIsOccupied(false);
 	}
 
+	/**
+	 * Initiates Castle King Side for a King Piece
+	 *
+	 * @param row row to use
+	 * @param chessBoard board to use
+	 */
 	public void CastleKingsSide(int row, ChessSpace[][] chessBoard){
 		chessBoard[row][5].setPieceOn(chessBoard[row][7].getPieceOn());
 		chessBoard[row][5].setIsOccupied(true);

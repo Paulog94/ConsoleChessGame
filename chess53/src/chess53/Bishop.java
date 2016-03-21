@@ -1,16 +1,41 @@
 package chess53;
 
+/**
+ * Bishop Class
+ * Identifies the movement for the Bishop piece
+ *
+ * @author Joshua Cross and Paulo Garcia
+ */
 public class Bishop extends ChessPiece {
 	private final char symbol = 'B';
 
+	/**
+	 * Initializes Bishop piece
+	 *
+	 * @param row starting row
+	 * @param column starting column
+	 * @param color starting team
+	 */
 	public Bishop(int row, int column, char color) {
 		super(row,column,color);
 	}
-	
+
+	/**
+	 * Gets Symbol
+	 * @return Symbol
+	 */
 	public char getSymbol(){
 		return symbol;
 	}
 
+	/**
+	 * Validates Bishop movement
+	 *
+	 * @param row destination row
+	 * @param column destination column
+	 * @param cb board to check
+	 * @return true or false
+	 */
 	public boolean isValid(int row, int column, ChessSpace[][] cb){
 
 		int cR = super.getRow();
