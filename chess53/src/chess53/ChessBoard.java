@@ -268,6 +268,7 @@ public class ChessBoard {
 	 * @return true or false
 	 */
 	public boolean WhiteCheck() {
+		whiteCheckers.clear();
 		for (ChessPiece p : whitePieces) {
 			if (p.isValid(blackKing.getRow(), blackKing.getColumn(), chessBoard)) {
 				if (p instanceof Pawn) {
@@ -299,6 +300,7 @@ public class ChessBoard {
 	 * @return true or false
 	 */
 	public boolean BlackCheck(){
+		blackCheckers.clear();
 		for (ChessPiece p : blackPieces) {
 			if (p.isValid(whiteKing.getRow(), whiteKing.getColumn(), chessBoard)) {
 				if (p instanceof Pawn) {
@@ -442,10 +444,12 @@ public class ChessBoard {
 							if(checkMate()) {
 								if (turn % 2 == 1) {
 									chess.checkMate = true;
+									System.out.println("\nand Mate!");
 									System.out.println("\nwhite wins");
 								}
 								else{
 									chess.checkMate = true;
+									System.out.println("\nand Mate!");
 									System.out.println("\nblack wins");
 								}
 							}
@@ -508,10 +512,12 @@ public class ChessBoard {
 							if(checkMate()) {
 								if (turn % 2 == 1) {
 									chess.checkMate = true;
+									System.out.println("\nand Mate!");
 									System.out.println("\nwhite wins");
 								}
 								else{
 									chess.checkMate = true;
+									System.out.println("\nand Mate!");
 									System.out.println("\nblack wins");
 								}
 							}
@@ -667,6 +673,7 @@ public class ChessBoard {
 		//except the king, that would have been found in stage 1.
 
 		if((currentKing == whiteKing)&&(!blackCheckers.isEmpty())){
+			BlackCheck();
 			updatePieces();
 			for (ChessPiece cp : blackCheckers){
 				for (ChessPiece wp : whitePieces){
@@ -693,6 +700,7 @@ public class ChessBoard {
 
 		// lastly we trace path between checker and checkee and see if anyone can block.
 		if((currentKing == whiteKing)&&(!blackCheckers.isEmpty())){
+			WhiteCheck();
 			updatePieces();
 			for (ChessPiece cp : blackCheckers){
 				if ((cp instanceof Knight) || (cp instanceof Pawn)) {
@@ -766,6 +774,89 @@ public class ChessBoard {
 					if ((dR < cR) && (dC > cC)){
 						for(int i = (cR-1), j = (cC +1); i > dR; i--, j++){
 							for (ChessPiece bp : whitePieces){
+								if(bp.isValid(i, j, chessBoard)){
+									return false;
+								}
+							}
+						}	
+					}
+				}
+			}
+		}
+		if((currentKing == blackKing)&&(!whiteCheckers.isEmpty())){
+			updatePieces();
+			for (ChessPiece cp : whiteCheckers){
+				if ((cp instanceof Knight) || (cp instanceof Pawn)) {
+					return true;
+				}else{
+					int dR = cp.getRow();
+					int dC = cp.getColumn();
+					if ((dR > cR)&&(dC == cC)){
+						for(int i = (cR+1); i < dR; i++){
+							for (ChessPiece bp : blackPieces){
+								if(bp.isValid(i, cC, chessBoard)){
+									return false;
+								}
+							}
+						}
+					}
+					if ((cR > dR) && (cC == dC)){
+						for(int i = (cR-1); i > dR; i--){
+							for (ChessPiece bp : blackPieces){
+								if(bp.isValid(i, cC, chessBoard)){
+									return false;
+								}
+							}
+						}	
+					}
+					if ((dC > cC) && (dR == cR)){
+						for(int i = (cC+1); i < dC; i++){
+							for (ChessPiece bp : blackPieces){
+								if(bp.isValid(cR, i, chessBoard)){
+									return false;
+								}
+							}
+						}
+					}
+					if ((cC > dC) && (dR == cR)){
+						for(int i = (cC-1); i > dC; i--){
+							for (ChessPiece bp : blackPieces){
+								if(bp.isValid(cR, i, chessBoard)){
+									return false;
+								}
+							}
+						}	
+					}
+					if ((dR < cR) && (dC < cC)){
+						for(int i = (cR-1), j = (cC -1); i > dR; i--, j--){
+							for (ChessPiece bp : blackPieces){
+								if(bp.isValid(i, j, chessBoard)){
+									return false;
+								}
+							}
+						}
+					}
+					if ((dR > cR) && (dC < cC)) {
+						for(int i = (cR+1), j = (cC -1); i < dR; i++, j--){
+							for (ChessPiece bp : blackPieces){
+								if(bp.isValid(i, j, chessBoard)){
+									return false;
+								}
+							}
+						}	
+					}
+					if ((dR > cR) && (dC > cC)){
+						for(int i = (cR+1), j = (cC +1); i < dR; i++, j++){
+							for (ChessPiece bp : blackPieces){
+								if(bp.isValid(i, j, chessBoard)){
+									return false;
+								}
+							}
+						}
+					}
+					if ((dR < cR) && (dC > cC)){
+						for(int i = (cR-1), j = (cC +1); i > dR; i--, j++){
+							for (ChessPiece bp : blackPieces){
 								if(bp.isValid(i, j, chessBoard)){
 									return false;
 								}
